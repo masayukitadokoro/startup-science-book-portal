@@ -14,8 +14,23 @@ import {
   ArrowRight
 } from 'lucide-react'
 
+// 型定義
+type Profile = {
+  display_name?: string | null
+  subscription_tier?: string | null
+}
+
+type Resource = {
+  id: string
+  title: string
+  description?: string | null
+  resource_type: 'slide' | 'pdf' | 'spreadsheet' | 'video' | 'link'
+  external_url?: string | null
+  storage_path?: string | null
+}
+
 export default async function DashboardPage() {
-  const supabase = createClient()
+  const supabase = await createClient()
   
   const { data: { user } } = await supabase.auth.getUser()
   
@@ -24,18 +39,21 @@ export default async function DashboardPage() {
   }
 
   // プロファイル取得
-  const { data: profile } = await supabase
+  const { data: profileData } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single()
 
   // リソース取得
-  const { data: resources } = await supabase
+  const { data: resourcesData } = await supabase
     .from('resources')
     .select('*')
     .eq('is_active', true)
     .order('sort_order')
+
+  const profile = profileData as Profile | null
+  const resources = resourcesData as Resource[] | null
 
   const resourceIcons: Record<string, React.ReactNode> = {
     slide: <Presentation className="w-5 h-5" />,
