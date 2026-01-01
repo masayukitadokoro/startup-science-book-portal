@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
-import Header from '@/components/Header'
 import { 
   FileText, 
   Presentation, 
@@ -11,7 +10,8 @@ import {
   Download,
   BookOpen,
   Star,
-  ArrowRight
+  ArrowRight,
+  LogOut
 } from 'lucide-react'
 
 // 型定義
@@ -56,11 +56,11 @@ export default async function DashboardPage() {
   const resources = resourcesData as Resource[] | null
 
   const resourceIcons: Record<string, React.ReactNode> = {
-    slide: <Presentation className="w-5 h-5" />,
-    pdf: <FileText className="w-5 h-5" />,
-    spreadsheet: <Table className="w-5 h-5" />,
-    video: <Video className="w-5 h-5" />,
-    link: <ExternalLink className="w-5 h-5" />,
+    slide: <Presentation className="w-5 h-5 text-white" />,
+    pdf: <FileText className="w-5 h-5 text-white" />,
+    spreadsheet: <Table className="w-5 h-5 text-white" />,
+    video: <Video className="w-5 h-5 text-white" />,
+    link: <ExternalLink className="w-5 h-5 text-white" />,
   }
 
   const resourceColors: Record<string, string> = {
@@ -72,16 +72,49 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      <Header showSearch={false} />
+    <div className="min-h-screen bg-dark-950">
+      {/* Header */}
+      <header className="border-b border-dark-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white font-bold">
+                起
+              </div>
+              <div>
+                <span className="font-bold text-white">起業の科学</span>
+                <span className="text-primary-400 text-sm ml-1">PROMPT PORTAL</span>
+              </div>
+            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/prompts"
+                className="hidden sm:flex items-center gap-2 text-dark-300 hover:text-white transition-colors"
+              >
+                <BookOpen className="w-4 h-4" />
+                プロンプト
+              </Link>
+              <form action="/auth/signout" method="post">
+                <button
+                  type="submit"
+                  className="flex items-center gap-2 text-dark-400 hover:text-white transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden sm:inline">ログアウト</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <div className="glass rounded-2xl p-6 sm:p-8 mb-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2">
-                ようこそ、{profile?.display_name || user.email}さん
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                ようこそ、{profile?.display_name || user.email?.split('@')[0]}さん
               </h1>
               <p className="text-dark-400">
                 起業の科学の特典コンテンツにアクセスできます
@@ -107,7 +140,7 @@ export default async function DashboardPage() {
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold mb-1 group-hover:text-primary-300 transition-colors">
+                <h3 className="font-semibold text-white mb-1 group-hover:text-primary-300 transition-colors">
                   プロンプト一覧
                 </h3>
                 <p className="text-sm text-dark-400">全プロンプトにアクセス</p>
@@ -127,10 +160,10 @@ export default async function DashboardPage() {
                 <ExternalLink className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold mb-1 group-hover:text-green-300 transition-colors">
-                  ユニコーンファーム
+                <h3 className="font-semibold text-white mb-1 group-hover:text-green-300 transition-colors">
+                  動画・記事ポータル
                 </h3>
-                <p className="text-sm text-dark-400">オンラインプログラム</p>
+                <p className="text-sm text-dark-400">もっと深く学ぶ</p>
               </div>
               <ArrowRight className="w-5 h-5 text-dark-500 group-hover:text-green-400 transition-colors" />
             </div>
@@ -139,7 +172,7 @@ export default async function DashboardPage() {
 
         {/* Resources Section */}
         <section>
-          <h2 className="text-xl font-bold mb-6">ダウンロード資料</h2>
+          <h2 className="text-xl font-bold text-white mb-6">ダウンロード資料</h2>
           
           {resources && resources.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -154,7 +187,7 @@ export default async function DashboardPage() {
                         {resourceIcons[resource.resource_type]}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium mb-1 truncate">{resource.title}</h3>
+                        <h3 className="font-medium text-white mb-1 truncate">{resource.title}</h3>
                         <p className="text-sm text-dark-400 line-clamp-2">
                           {resource.description}
                         </p>
@@ -204,7 +237,7 @@ export default async function DashboardPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-transparent" />
               <div className="relative flex flex-col sm:flex-row items-center gap-6">
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold mb-2">
+                  <h3 className="text-xl font-bold text-white mb-2">
                     プレミアム会員にアップグレード
                   </h3>
                   <p className="text-dark-400">
@@ -216,7 +249,7 @@ export default async function DashboardPage() {
                   href="https://unicornfarm.jp/premium"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg shadow-primary-500/25"
+                  className="shrink-0 flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg shadow-primary-500/25 text-white"
                 >
                   詳細を見る
                   <ArrowRight className="w-4 h-4" />
@@ -226,6 +259,28 @@ export default async function DashboardPage() {
           </section>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-dark-800 py-8 mt-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-dark-500 text-sm">
+              © 2024 起業の科学. All rights reserved.
+            </div>
+            <div className="flex items-center gap-6 text-sm">
+              <a href="#" className="text-dark-400 hover:text-white transition-colors">
+                利用規約
+              </a>
+              <a href="#" className="text-dark-400 hover:text-white transition-colors">
+                プライバシー
+              </a>
+              <a href="#" className="text-dark-400 hover:text-white transition-colors">
+                お問い合わせ
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
