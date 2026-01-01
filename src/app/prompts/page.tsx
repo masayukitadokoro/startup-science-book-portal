@@ -4,8 +4,27 @@ import { useState, useEffect, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import Header from '@/components/Header'
 import PromptCard from '@/components/PromptCard'
-import { Prompt } from '@/lib/supabase/database.types'
-import { Filter, ChevronDown, Loader2 } from 'lucide-react'
+import { Filter, Loader2 } from 'lucide-react'
+
+// 型定義
+type Prompt = {
+  id: string
+  chapter_id: string
+  step_number: number
+  title: string
+  purpose: string | null
+  category: string | null
+  prompt_text: string
+  access_level: 'public' | 'authenticated' | 'premium'
+  tags: string[]
+  usage_tips: string | null
+  sort_order: number
+  is_active: boolean
+  copy_count: number
+  view_count: number
+  created_at: string
+  updated_at: string
+}
 
 export default function PromptsPage() {
   const [prompts, setPrompts] = useState<Prompt[]>([])
@@ -31,7 +50,7 @@ export default function PromptsPage() {
       if (error) {
         console.error('Error fetching prompts:', error)
       } else {
-        setPrompts(data || [])
+        setPrompts((data as Prompt[]) || [])
       }
       setLoading(false)
     }
@@ -90,13 +109,15 @@ export default function PromptsPage() {
   }
 
   const handleCopy = async (promptId: string) => {
+    // 統計更新（エラーを無視）
     try {
-      await supabase.rpc('increment_prompt_stat', {
-        prompt_uuid: promptId,
-        stat_type: 'copy'
-      })
+      await fetch('/api/track-copy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ promptId })
+      }).catch(() => {})
     } catch (err) {
-      console.error('Error tracking copy:', err)
+      // 統計更新のエラーは無視
     }
   }
 
