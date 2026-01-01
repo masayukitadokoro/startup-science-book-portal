@@ -1,12 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Mail, Lock, Loader2, ArrowLeft, CheckCircle } from 'lucide-react'
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -50,10 +50,11 @@ export default function LoginPage() {
 
     if (error) {
       setError(error.message)
+      setLoading(false)
     } else {
       setMagicLinkSent(true)
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const handleMagicLink = async (e: React.FormEvent) => {
@@ -70,14 +71,14 @@ export default function LoginPage() {
 
     if (error) {
       setError(error.message)
+      setLoading(false)
     } else {
       setMagicLinkSent(true)
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const handleGoogleLogin = async () => {
-    setLoading(true)
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -91,23 +92,22 @@ export default function LoginPage() {
       <main className="min-h-screen flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="glass rounded-2xl p-8 text-center">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-green-400" />
+            <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-8 h-8 text-green-500" />
             </div>
             <h1 className="text-2xl font-bold mb-2">メールを確認してください</h1>
             <p className="text-dark-400 mb-6">
-              <span className="text-white">{email}</span> に
-              {mode === 'signup' ? '確認メール' : 'ログインリンク'}を送信しました。
-              メール内のリンクをクリックしてください。
+              {email} に{mode === 'signup' ? '確認' : 'ログイン'}リンクを送信しました。
+              メール内のリンクをクリックして{mode === 'signup' ? 'アカウントを有効化' : 'ログイン'}してください。
             </p>
             <button
               onClick={() => {
                 setMagicLinkSent(false)
                 setEmail('')
               }}
-              className="text-primary-400 hover:text-primary-300 text-sm"
+              className="text-primary-400 hover:text-primary-300 transition-colors"
             >
-              別のメールアドレスを使う
+              別のメールアドレスを使用
             </button>
           </div>
         </div>
@@ -118,32 +118,30 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Back link */}
+        {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-dark-400 hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-dark-400 hover:text-white transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
-          トップに戻る
+          ホームに戻る
         </Link>
 
         {/* Card */}
         <div className="glass rounded-2xl p-8">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">
-              起
-            </div>
-            <h1 className="text-2xl font-bold mb-2">
-              {mode === 'signup' ? 'アカウント作成' : 'ログイン'}
-            </h1>
-            <p className="text-dark-400 text-sm">
-              起業の科学 Prompt Portal
-            </p>
-          </div>
+          <h1 className="text-2xl font-bold text-center mb-2">
+            {mode === 'signup' ? 'アカウント作成' : mode === 'magic' ? 'マジックリンクでログイン' : 'ログイン'}
+          </h1>
+          <p className="text-dark-400 text-center mb-8">
+            {mode === 'signup'
+              ? '起業の科学の特典コンテンツにアクセス'
+              : mode === 'magic'
+              ? 'メールアドレスにログインリンクを送信します'
+              : '書籍購入者特典にアクセス'}
+          </p>
 
-          {/* Mode tabs */}
-          <div className="flex gap-1 p-1 bg-dark-900 rounded-lg mb-6">
+          {/* Mode Tabs */}
+          <div className="flex gap-2 mb-6 p-1 bg-dark-900 rounded-lg">
             <button
               onClick={() => setMode('login')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
@@ -179,7 +177,6 @@ export default function LoginPage() {
           {/* Google Login */}
           <button
             onClick={handleGoogleLogin}
-            disabled={loading}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white text-gray-800 rounded-xl font-medium hover:bg-gray-100 transition-colors mb-6"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -289,5 +286,17 @@ export default function LoginPage() {
         </p>
       </div>
     </main>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-primary-500 animate-spin" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   )
 }
