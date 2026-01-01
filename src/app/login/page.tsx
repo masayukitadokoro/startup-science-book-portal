@@ -4,7 +4,7 @@ import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
-import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Download, FileText, Video } from 'lucide-react'
+import { Mail, Lock, Loader2, ArrowLeft, CheckCircle, Download, FileText, Video, Clock, CreditCard, Shield } from 'lucide-react'
 
 function SignUpForm() {
   const [email, setEmail] = useState('')
@@ -96,15 +96,15 @@ function SignUpForm() {
 
   if (emailSent) {
     return (
-      <main className="min-h-screen flex items-center justify-center p-4">
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
-          <div className="glass rounded-2xl p-8 text-center">
-            <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-8 h-8 text-green-500" />
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 text-center">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-8 h-8 text-green-600" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">メールを確認してください</h1>
-            <p className="text-dark-400 mb-6">
-              <span className="text-white">{email}</span> に
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">メールを確認してください</h1>
+            <p className="text-gray-600 mb-6">
+              <span className="font-medium text-gray-900">{email}</span> に
               {mode === 'signup' ? '確認' : 'ログイン'}リンクを送信しました。
               <br />
               メール内のリンクをクリックしてください。
@@ -114,7 +114,7 @@ function SignUpForm() {
                 setEmailSent(false)
                 setEmail('')
               }}
-              className="text-primary-400 hover:text-primary-300 transition-colors"
+              className="text-blue-600 hover:text-blue-700 transition-colors font-medium"
             >
               別のメールアドレスを使用
             </button>
@@ -125,63 +125,63 @@ function SignUpForm() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-dark-400 hover:text-white transition-colors mb-8"
+          className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           ホームに戻る
         </Link>
 
         {/* Benefits Card */}
-        <div className="glass rounded-2xl p-6 mb-6">
-          <h2 className="text-sm font-medium text-dark-400 mb-4">サインアップで入手できるもの</h2>
+        <div className="bg-blue-50 rounded-2xl p-6 mb-6 border border-blue-100">
+          <h2 className="text-sm font-medium text-blue-800 mb-4">完全無料で手に入るもの</h2>
           <div className="space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary-500/10 rounded-lg flex items-center justify-center">
-                <FileText className="w-4 h-4 text-primary-400" />
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                <FileText className="w-4 h-4 text-blue-600" />
               </div>
-              <span className="text-white text-sm">プロダクト設計スライド（PDF）</span>
+              <span className="text-gray-700 text-sm">プロダクト設計スライド（PDF）</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center">
-                <CheckCircle className="w-4 h-4 text-green-400" />
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                <CheckCircle className="w-4 h-4 text-green-600" />
               </div>
-              <span className="text-white text-sm">PMF達成チェックリスト</span>
+              <span className="text-gray-700 text-sm">PMF達成チェックリスト</span>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center">
-                <Video className="w-4 h-4 text-purple-400" />
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center shadow-sm">
+                <Video className="w-4 h-4 text-purple-600" />
               </div>
-              <span className="text-white text-sm">起業の科学 解説動画</span>
+              <span className="text-gray-700 text-sm">起業の科学 解説動画</span>
             </div>
           </div>
         </div>
 
         {/* Form Card */}
-        <div className="glass rounded-2xl p-8">
-          <h1 className="text-2xl font-bold text-white text-center mb-2">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+          <h1 className="text-2xl font-bold text-gray-900 text-center mb-2">
             {mode === 'signup' ? '無料サインアップ' : mode === 'magic' ? 'マジックリンク' : 'ログイン'}
           </h1>
-          <p className="text-dark-400 text-center mb-8">
+          <p className="text-gray-500 text-center mb-6">
             {mode === 'signup'
-              ? '限定資料にアクセスしよう'
+              ? '限定資料に今すぐアクセス'
               : mode === 'magic'
               ? 'メールでログインリンクを受け取る'
               : 'アカウントにログイン'}
           </p>
 
           {/* Mode Tabs */}
-          <div className="flex gap-2 mb-6 p-1 bg-dark-900 rounded-lg">
+          <div className="flex gap-1 mb-6 p-1 bg-gray-100 rounded-lg">
             <button
               onClick={() => setMode('signup')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                 mode === 'signup'
-                  ? 'bg-primary-500 text-white'
-                  : 'text-dark-400 hover:text-white'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-900'
               }`}
             >
               サインアップ
@@ -190,8 +190,8 @@ function SignUpForm() {
               onClick={() => setMode('login')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                 mode === 'login'
-                  ? 'bg-dark-700 text-white'
-                  : 'text-dark-400 hover:text-white'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-900'
               }`}
             >
               ログイン
@@ -200,8 +200,8 @@ function SignUpForm() {
               onClick={() => setMode('magic')}
               className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                 mode === 'magic'
-                  ? 'bg-dark-700 text-white'
-                  : 'text-dark-400 hover:text-white'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-500 hover:text-gray-900'
               }`}
             >
               マジックリンク
@@ -211,7 +211,7 @@ function SignUpForm() {
           {/* Google Login */}
           <button
             onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white text-gray-800 rounded-xl font-medium hover:bg-gray-100 transition-colors mb-6"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border border-gray-300 text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-colors mb-6"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -236,10 +236,10 @@ function SignUpForm() {
 
           <div className="relative mb-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-dark-700" />
+              <div className="w-full border-t border-gray-200" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-dark-800 text-dark-500">または</span>
+              <span className="px-4 bg-white text-gray-400">または</span>
             </div>
           </div>
 
@@ -247,18 +247,18 @@ function SignUpForm() {
           <form onSubmit={mode === 'signup' ? handleSignUp : mode === 'magic' ? handleMagicLink : handleLogin}>
             {/* Email */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-dark-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 メールアドレス
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-500" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="email@example.com"
-                  className="w-full pl-10 pr-4 py-3 bg-dark-900 border border-dark-700 rounded-xl text-white placeholder:text-dark-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 />
               </div>
             </div>
@@ -266,11 +266,11 @@ function SignUpForm() {
             {/* Password (not for magic link) */}
             {mode !== 'magic' && (
               <div className="mb-6">
-                <label className="block text-sm font-medium text-dark-300 mb-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   パスワード
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-dark-500" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="password"
                     value={password}
@@ -278,18 +278,18 @@ function SignUpForm() {
                     required
                     placeholder="••••••••"
                     minLength={6}
-                    className="w-full pl-10 pr-4 py-3 bg-dark-900 border border-dark-700 rounded-xl text-white placeholder:text-dark-500 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
+                    className="w-full pl-10 pr-4 py-3 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all"
                   />
                 </div>
                 {mode === 'signup' && (
-                  <p className="text-xs text-dark-500 mt-1">6文字以上で入力してください</p>
+                  <p className="text-xs text-gray-500 mt-1">6文字以上で入力してください</p>
                 )}
               </div>
             )}
 
             {/* Error */}
             {error && (
-              <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
                 {error}
               </div>
             )}
@@ -298,7 +298,7 @@ function SignUpForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg shadow-primary-500/25 disabled:opacity-50 disabled:cursor-not-allowed text-white"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-xl font-bold transition-all shadow-lg shadow-orange-500/30 disabled:opacity-50 disabled:cursor-not-allowed text-white"
             >
               {loading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -314,14 +314,28 @@ function SignUpForm() {
               )}
             </button>
           </form>
+
+          {/* マイクロコピー */}
+          {mode === 'signup' && (
+            <div className="flex items-center justify-center gap-4 mt-4 text-xs text-gray-500">
+              <div className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                <span>30秒で完了</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <CreditCard className="w-3 h-3" />
+                <span>クレカ不要</span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer */}
-        <p className="text-center text-dark-500 text-sm mt-6">
+        <p className="text-center text-gray-500 text-sm mt-6">
           サインアップすることで、
-          <a href="#" className="text-primary-400 hover:text-primary-300">利用規約</a>
+          <a href="#" className="text-blue-600 hover:text-blue-700">利用規約</a>
           と
-          <a href="#" className="text-primary-400 hover:text-primary-300">プライバシーポリシー</a>
+          <a href="#" className="text-blue-600 hover:text-blue-700">プライバシーポリシー</a>
           に同意したものとみなされます。
         </p>
       </div>
@@ -332,8 +346,8 @@ function SignUpForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 text-primary-500 animate-spin" />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
       </div>
     }>
       <SignUpForm />
