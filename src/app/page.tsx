@@ -33,7 +33,7 @@ export default function HomePage() {
               href="/login"
               className="flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors shadow-sm"
             >
-              無料サインアップ
+              無料登録
             </Link>
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function HomePage() {
               className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-500/40 hover:scale-[1.02]"
             >
               <Download className="w-5 h-5" />
-              今すぐ無料で手に入れる
+              無料で全て入手
               <ArrowRight className="w-5 h-5" />
             </Link>
             
@@ -103,26 +103,23 @@ export default function HomePage() {
               href="/prompts"
               className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-medium transition-all border border-gray-200"
             >
-              まずはプロンプトを見る
+              サンプルプロンプトを見る
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* What You Get Section */}
+      {/* Sample Content Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 text-center mb-4">
-            サインアップで手に入るもの
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 text-center mb-12">
+            コンテンツのサンプル
           </h2>
-          <p className="text-gray-600 text-center mb-12">
-            書籍の学びを実践に移すためのツールキット
-          </p>
 
           {/* Content Cards */}
           <div className="grid sm:grid-cols-3 gap-6">
-            {/* Card 1: PDF Slide - Idea Verification */}
+            {/* Card 1: PDF Slide */}
             <a
               href="/slides/idea-verification.pdf"
               target="_blank"
@@ -135,9 +132,8 @@ export default function HomePage() {
                     <FileText className="w-7 h-7" />
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-teal-200 font-medium mb-1">PDF SLIDE</div>
-                    <div className="font-bold text-lg">Idea Verification</div>
-                    <div className="text-teal-100 text-sm">良いアイディアに気づく</div>
+                    <div className="text-sm font-medium text-white/90">良いアイディアとは</div>
+                    <div className="text-teal-100 text-sm mt-1">（PDFサンプル）を見る</div>
                   </div>
                 </div>
                 <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -146,11 +142,9 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <h3 className="font-medium text-gray-900 group-hover:text-teal-600 transition-colors">アイディア検証スライド</h3>
-              <p className="text-sm text-gray-500">課題の質を高め、良いビジネスアイディアを見つける方法</p>
             </a>
 
-            {/* Card 2: Google Spreadsheet - イノベーションのジレンマ対応リスト */}
+            {/* Card 2: Google Spreadsheet */}
             <a
               href="https://docs.google.com/spreadsheets/d/1mFEZ7ayNJQOfFdvBn2feExM34MjrV7BDhe6Ok1H1w08/edit?gid=0#gid=0"
               target="_blank"
@@ -163,9 +157,8 @@ export default function HomePage() {
                     <Table className="w-7 h-7" />
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-green-200 font-medium mb-1">SPREADSHEET</div>
-                    <div className="font-bold text-lg">良いアイディアの事例</div>
-                    <div className="text-green-100 text-sm">イノベーションのジレンマ対応</div>
+                    <div className="text-sm font-medium text-white/90">良いアイディアの事例集</div>
+                    <div className="text-green-100 text-sm mt-1">サンプルを見る</div>
                   </div>
                 </div>
                 <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -174,8 +167,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <h3 className="font-medium text-gray-900 group-hover:text-green-600 transition-colors">イノベーションのジレンマ対応リスト</h3>
-              <p className="text-sm text-gray-500">大企業が抱えるジレンマをついて成功したビジネスアイディア集</p>
             </a>
 
             {/* Card 3: YouTube Video */}
@@ -191,9 +182,8 @@ export default function HomePage() {
                     <Play className="w-7 h-7 ml-1" />
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-red-200 font-medium mb-1">YOUTUBE</div>
-                    <div className="font-bold text-lg">解説動画</div>
-                    <div className="text-red-100 text-sm">著者による講義</div>
+                    <div className="text-sm font-medium text-white/90">解説動画</div>
+                    <div className="text-red-100 text-sm mt-1">サンプルを見る</div>
                   </div>
                 </div>
                 <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -202,40 +192,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-              <h3 className="font-medium text-gray-900 group-hover:text-red-600 transition-colors">起業の科学 解説動画</h3>
-              <p className="text-sm text-gray-500">書籍の内容を著者が動画でわかりやすく解説</p>
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Portal CTA */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 sm:p-12 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
-            <div className="relative">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Video className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-                動画・記事でもっと深く学ぶ
-              </h2>
-              <p className="text-gray-300 mb-8 max-w-lg mx-auto">
-                「起業の科学」著者による解説動画や、最新のスタートアップ事例を
-                <br className="hidden sm:block" />
-                動画・記事で学べる専用ポータルをご利用いただけます。
-              </p>
-              <a
-                href="https://unicornfarm.jp"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-gray-100 text-gray-900 rounded-xl font-medium transition-all"
-              >
-                起業の科学ポータルへ
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
           </div>
         </div>
       </section>
@@ -254,7 +211,7 @@ export default function HomePage() {
               className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-500/40 hover:scale-[1.02]"
             >
               <Download className="w-5 h-5" />
-              無料で手に入れる
+              無料で全て入手
               <ArrowRight className="w-5 h-5" />
             </Link>
             
@@ -275,7 +232,7 @@ export default function HomePage() {
               href="/prompts"
               className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl font-medium transition-all border border-gray-200"
             >
-              プロンプトを見る
+              サンプルプロンプトを見る
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
