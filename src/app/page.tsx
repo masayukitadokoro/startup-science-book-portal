@@ -7,7 +7,10 @@ import {
   Sparkles,
   Download,
   Clock,
-  CreditCard
+  CreditCard,
+  Table,
+  Play,
+  ExternalLink
 } from 'lucide-react'
 
 export default function HomePage() {
@@ -117,61 +120,91 @@ export default function HomePage() {
             書籍の学びを実践に移すためのツールキット
           </p>
 
-          {/* Slide Previews */}
+          {/* Content Cards */}
           <div className="grid sm:grid-cols-3 gap-6">
-            {/* Slide 1 */}
-            <div className="group">
-              <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 rounded-xl border border-gray-200 overflow-hidden mb-3 relative hover:border-orange-300 transition-colors">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                  <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
-                    <FileText className="w-6 h-6 text-orange-600" />
+            {/* Card 1: PDF Slide - Idea Verification */}
+            <a
+              href="/slides/idea-verification.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block"
+            >
+              <div className="aspect-[4/3] bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl overflow-hidden mb-3 relative hover:shadow-xl transition-all">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white">
+                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <FileText className="w-7 h-7" />
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-orange-600 font-medium mb-1">SLIDE 01</div>
-                    <div className="text-gray-900 font-medium">プロダクト設計</div>
-                    <div className="text-gray-500 text-sm">フィーチャー洗い出し</div>
+                    <div className="text-xs text-teal-200 font-medium mb-1">PDF SLIDE</div>
+                    <div className="font-bold text-lg">Idea Verification</div>
+                    <div className="text-teal-100 text-sm">良いアイディアに気づく</div>
+                  </div>
+                </div>
+                <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-white/20 rounded-full p-2">
+                    <ExternalLink className="w-4 h-4 text-white" />
                   </div>
                 </div>
               </div>
-              <h3 className="font-medium text-gray-900">プロダクト設計スライド</h3>
-              <p className="text-sm text-gray-500">MVP設計の具体的なステップを解説</p>
-            </div>
+              <h3 className="font-medium text-gray-900 group-hover:text-teal-600 transition-colors">アイディア検証スライド</h3>
+              <p className="text-sm text-gray-500">課題の質を高め、良いビジネスアイディアを見つける方法</p>
+            </a>
 
-            {/* Slide 2 */}
-            <div className="group">
-              <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 rounded-xl border border-gray-200 overflow-hidden mb-3 relative hover:border-green-300 transition-colors">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                  <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
-                    <CheckCircle className="w-6 h-6 text-green-600" />
+            {/* Card 2: Google Spreadsheet - イノベーションのジレンマ対応リスト */}
+            <a
+              href="https://docs.google.com/spreadsheets/d/1mFEZ7ayNJQOfFdvBn2feExM34MjrV7BDhe6Ok1H1w08/edit?gid=0#gid=0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block"
+            >
+              <div className="aspect-[4/3] bg-gradient-to-br from-green-500 to-green-600 rounded-xl overflow-hidden mb-3 relative hover:shadow-xl transition-all">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white">
+                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Table className="w-7 h-7" />
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-green-600 font-medium mb-1">SLIDE 02</div>
-                    <div className="text-gray-900 font-medium">PMFチェック</div>
-                    <div className="text-gray-500 text-sm">達成度を可視化</div>
+                    <div className="text-xs text-green-200 font-medium mb-1">SPREADSHEET</div>
+                    <div className="font-bold text-lg">良いアイディアの事例</div>
+                    <div className="text-green-100 text-sm">イノベーションのジレンマ対応</div>
+                  </div>
+                </div>
+                <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-white/20 rounded-full p-2">
+                    <ExternalLink className="w-4 h-4 text-white" />
                   </div>
                 </div>
               </div>
-              <h3 className="font-medium text-gray-900">PMF達成チェックリスト</h3>
-              <p className="text-sm text-gray-500">プロダクトマーケットフィットの判定基準</p>
-            </div>
+              <h3 className="font-medium text-gray-900 group-hover:text-green-600 transition-colors">イノベーションのジレンマ対応リスト</h3>
+              <p className="text-sm text-gray-500">大企業が抱えるジレンマをついて成功したビジネスアイディア集</p>
+            </a>
 
-            {/* Slide 3 */}
-            <div className="group">
-              <div className="aspect-[4/3] bg-gradient-to-br from-gray-100 to-gray-50 rounded-xl border border-gray-200 overflow-hidden mb-3 relative hover:border-purple-300 transition-colors">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                  <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
-                    <Video className="w-6 h-6 text-purple-600" />
+            {/* Card 3: YouTube Video */}
+            <a
+              href="https://www.youtube.com/watch?v=g0_NNunXpas"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block"
+            >
+              <div className="aspect-[4/3] bg-gradient-to-br from-red-500 to-red-600 rounded-xl overflow-hidden mb-3 relative hover:shadow-xl transition-all">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white">
+                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Play className="w-7 h-7 ml-1" />
                   </div>
                   <div className="text-center">
-                    <div className="text-xs text-purple-600 font-medium mb-1">VIDEO</div>
-                    <div className="text-gray-900 font-medium">解説動画</div>
-                    <div className="text-gray-500 text-sm">著者による解説</div>
+                    <div className="text-xs text-red-200 font-medium mb-1">YOUTUBE</div>
+                    <div className="font-bold text-lg">解説動画</div>
+                    <div className="text-red-100 text-sm">著者による講義</div>
+                  </div>
+                </div>
+                <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-white/20 rounded-full p-2">
+                    <ExternalLink className="w-4 h-4 text-white" />
                   </div>
                 </div>
               </div>
-              <h3 className="font-medium text-gray-900">起業の科学 解説動画</h3>
-              <p className="text-sm text-gray-500">書籍の内容を動画でわかりやすく</p>
-            </div>
+              <h3 className="font-medium text-gray-900 group-hover:text-red-600 transition-colors">起業の科学 解説動画</h3>
+              <p className="text-sm text-gray-500">書籍の内容を著者が動画でわかりやすく解説</p>
+            </a>
           </div>
         </div>
       </section>
