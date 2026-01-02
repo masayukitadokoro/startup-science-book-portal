@@ -4,13 +4,12 @@ import {
   Video, 
   ArrowRight, 
   CheckCircle,
-  Sparkles,
   Download,
-  Clock,
-  CreditCard,
   Table,
   Play,
-  ExternalLink
+  ExternalLink,
+  MessageSquare,
+  BookOpen
 } from 'lucide-react'
 
 export default function HomePage() {
@@ -42,9 +41,10 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 border border-orange-100 rounded-full text-orange-700 text-sm mb-6">
-            <Sparkles className="w-4 h-4" />
-            書籍購入者限定コンテンツ
+          {/* 書籍購入者限定バッジ - 目立つデザイン */}
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-500 text-white rounded-full text-sm font-bold mb-6 shadow-lg shadow-orange-500/30">
+            <BookOpen className="w-4 h-4" />
+            書籍購入者限定
           </div>
           
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -56,7 +56,7 @@ export default function HomePage() {
           <p className="text-lg text-gray-600 mb-8">
             書籍に登場するAIプロンプト＆限定スライドを
             <br />
-            <span className="font-semibold text-gray-900">完全無料</span>で入手できます
+            <span className="font-semibold text-gray-900">無料で入手</span>
           </p>
           
           {/* 具体的な数字 */}
@@ -71,12 +71,12 @@ export default function HomePage() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-green-500" />
-              <span>解説動画 <span className="font-bold text-gray-900">視聴可能</span></span>
+              <span>解説動画 <span className="font-bold text-gray-900">20本視聴</span></span>
             </div>
           </div>
 
           {/* メインCTA */}
-          <div className="max-w-sm mx-auto space-y-4">
+          <div className="max-w-sm mx-auto">
             <Link
               href="/login?mode=signup"
               className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-500/40 hover:scale-[1.02]"
@@ -84,27 +84,6 @@ export default function HomePage() {
               <Download className="w-5 h-5" />
               無料で全て入手
               <ArrowRight className="w-5 h-5" />
-            </Link>
-            
-            {/* マイクロコピー */}
-            <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-              <div className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                <span>30秒で完了</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <CreditCard className="w-4 h-4" />
-                <span>クレカ不要</span>
-              </div>
-            </div>
-
-            {/* サブCTA */}
-            <Link
-              href="/prompts"
-              className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl font-medium transition-all border border-gray-200"
-            >
-              サンプルプロンプトを見る
-              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -117,9 +96,32 @@ export default function HomePage() {
             コンテンツのサンプル
           </h2>
 
-          {/* Content Cards */}
-          <div className="grid sm:grid-cols-3 gap-6">
-            {/* Card 1: PDF Slide */}
+          {/* Content Cards - 4つ */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Card 1: サンプルプロンプト */}
+            <Link
+              href="/prompts"
+              className="group block"
+            >
+              <div className="aspect-[4/3] bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl overflow-hidden mb-3 relative hover:shadow-xl transition-all">
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white">
+                  <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <MessageSquare className="w-7 h-7" />
+                  </div>
+                  <div className="text-center">
+                    <div className="text-sm font-medium text-white/90">サンプルプロンプト</div>
+                    <div className="text-purple-100 text-sm mt-1">を見る</div>
+                  </div>
+                </div>
+                <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-white/20 rounded-full p-2">
+                    <ArrowRight className="w-4 h-4 text-white" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Card 2: PDF Slide */}
             <a
               href="/slides/idea-verification.pdf"
               target="_blank"
@@ -144,7 +146,7 @@ export default function HomePage() {
               </div>
             </a>
 
-            {/* Card 2: Google Spreadsheet */}
+            {/* Card 3: Google Spreadsheet */}
             <a
               href="https://docs.google.com/spreadsheets/d/1mFEZ7ayNJQOfFdvBn2feExM34MjrV7BDhe6Ok1H1w08/edit?gid=0#gid=0"
               target="_blank"
@@ -169,7 +171,7 @@ export default function HomePage() {
               </div>
             </a>
 
-            {/* Card 3: YouTube Video */}
+            {/* Card 4: YouTube Video */}
             <a
               href="https://www.youtube.com/watch?v=g0_NNunXpas"
               target="_blank"
@@ -205,7 +207,7 @@ export default function HomePage() {
           </h2>
           
           {/* CTA */}
-          <div className="max-w-sm mx-auto space-y-4">
+          <div className="max-w-sm mx-auto">
             <Link
               href="/login?mode=signup"
               className="flex items-center justify-center gap-2 w-full px-6 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-xl font-bold text-lg transition-all shadow-lg shadow-orange-500/30 hover:shadow-orange-500/40 hover:scale-[1.02]"
@@ -213,27 +215,6 @@ export default function HomePage() {
               <Download className="w-5 h-5" />
               無料で全て入手
               <ArrowRight className="w-5 h-5" />
-            </Link>
-            
-            {/* マイクロコピー */}
-            <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
-              <div className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                <span>30秒で完了</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <CreditCard className="w-4 h-4" />
-                <span>クレカ不要</span>
-              </div>
-            </div>
-
-            {/* サブCTA */}
-            <Link
-              href="/prompts"
-              className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-white hover:bg-gray-50 text-gray-700 rounded-xl font-medium transition-all border border-gray-200"
-            >
-              サンプルプロンプトを見る
-              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
